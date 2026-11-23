@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Number Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #9face6);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 40px;
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #4A90E2;
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #4A90E2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #357ABD;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+        #loading {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #4A90E2;
+            display: none;
+        }
+    </style>
+    <script>
+        function generateRandomNumber() {
+            const x = parseInt(document.getElementById('minNumber').value);
+            const y = parseInt(document.getElementById('maxNumber').value);
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+
+            if (isNaN(x) || isNaN(y)) {
+                alert('Please enter valid numbers.');
+                return;
+            }
+
+            if (x > y) {
+                alert('The minimum value cannot be greater than the maximum value.');
+                return;
+            }
+
+            loading.style.display = 'block';
+            result.textContent = '';
+
+            setTimeout(() => {
+                const randomNumber = Math.floor(Math.random() * (y - x + 1)) + x;
+                result.textContent = `Random Number: ${randomNumber}`;
+                loading.style.display = 'none';
+            }, 100);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Number Generator</h1>
+        <label for="minNumber">From: </label>
+        <input type="number" id="minNumber" placeholder="Enter minimum value">
+        <label for="maxNumber">To: </label>
+        <input type="number" id="maxNumber" placeholder="Enter maximum value">
+        <button onclick="generateRandomNumber()">Generate</button>
+        <h2 id="result"></h2>
+        <p id="loading">Generating...</p>
+    </div>
+</body>
+</html>
